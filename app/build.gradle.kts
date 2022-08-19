@@ -19,6 +19,11 @@ android {
         }
     }
 
+    lint {
+        textReport = true
+        textOutput = File("stdout")
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
@@ -29,11 +34,11 @@ android {
         compose = true
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 
     composeOptions {
@@ -56,6 +61,8 @@ android {
 }
 
 dependencies {
+    implementation(project(Modules.coreUi))
+
     implementation(Compose.compiler)
     implementation(Compose.ui)
     implementation(Compose.uiToolingPreview)
@@ -66,6 +73,7 @@ dependencies {
     implementation(Compose.viewModelCompose)
     implementation(Compose.activityCompose)
     androidTestImplementation(Compose.composeJUnit)
+
 
     // TESTING
     testImplementation(Testing.robolectric)
