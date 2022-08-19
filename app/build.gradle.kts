@@ -19,6 +19,11 @@ android {
         }
     }
 
+    lint {
+        textReport = true
+        textOutput = File("stdout")
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
