@@ -56,6 +56,8 @@ android {
 }
 
 dependencies {
+    implementation(project(Modules.coreUi))
+
     implementation(Compose.compiler)
     implementation(Compose.ui)
     implementation(Compose.uiToolingPreview)
