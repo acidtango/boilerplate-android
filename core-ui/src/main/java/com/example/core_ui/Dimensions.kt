@@ -60,6 +60,6 @@ object Dimensions {
             spacing_2xl = 40.dp,
             spacing_3xl = 64.dp,
             spacing_4xl = 72.dp,
-            spacing_5xl = 96.dp
+            spacing_5xl = 96.dp,
         )
 }
