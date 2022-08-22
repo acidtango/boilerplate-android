@@ -16,3 +16,5 @@ dependencyResolutionManagement {
 rootProject.name = "BoilerPlateCompose"
 include ':app'
 include ':core-ui'
+include ':pkmn'
+include ':pkmn:pokemon_data'

@@ -10,12 +10,27 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.core_ui.theme.BoilerPlateComposeTheme
 import com.example.core_ui.Dimensions
+import com.example.core_ui.theme.BoilerPlateComposeTheme
+import com.example.pokemon_data.repository.PokemonRepository
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var pokemonRepository: PokemonRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // TODO Remove this.
+        GlobalScope.launch {
+            pokemonRepository.pokemons(0, 1)
+        }
+
         setContent {
             BoilerPlateComposeTheme {
                 // A surface container using the 'background' color from the theme
