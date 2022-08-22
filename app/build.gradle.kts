@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    id(Linter.ktlint) version Linter.ktlintVersion
 }
 
 android {
@@ -73,7 +74,6 @@ dependencies {
     implementation(Compose.viewModelCompose)
     implementation(Compose.activityCompose)
     androidTestImplementation(Compose.composeJUnit)
-
 
     // TESTING
     testImplementation(Testing.robolectric)
