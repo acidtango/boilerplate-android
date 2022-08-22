@@ -34,9 +34,17 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(name: String) {
     Text(
-        text = "Hello $name!", style = androidx.compose.ui.text.TextStyle(
+        text = "Hello $name!",
+        style = androidx.compose.ui.text.TextStyle(
             fontSize = Dimensions.text.headline
         )
+    )
+
+    listOf(
+        "a",
+        "a",
+        "a",
+        "a",
     )
 }
 

@@ -30,23 +30,23 @@ data class SpacingDimens(
     val spacing_2xl: Dp,
     val spacing_3xl: Dp,
     val spacing_4xl: Dp,
-    val spacing_5xl: Dp,
+    val spacing_5xl: Dp
 )
 
 @Immutable
 object Dimensions {
     val text: TextDimens
-    @Composable
-    get() = TextDimens(
-        h1 = 34.sp,
-        h2 = 32.sp,
-        h3 = 22.sp,
-        title = 28.sp,
-        headline = 17.sp,
-        body = 17.sp,
-        small = 14.sp,
-        caption = 12.sp
-    )
+        @Composable
+        get() = TextDimens(
+            h1 = 34.sp,
+            h2 = 32.sp,
+            h3 = 22.sp,
+            title = 28.sp,
+            headline = 17.sp,
+            body = 17.sp,
+            small = 14.sp,
+            caption = 12.sp
+        )
 
     val spacing: SpacingDimens
         @Composable
@@ -60,6 +60,6 @@ object Dimensions {
             spacing_2xl = 40.dp,
             spacing_3xl = 64.dp,
             spacing_4xl = 72.dp,
-            spacing_5xl = 96.dp,
+            spacing_5xl = 96.dp
         )
 }
