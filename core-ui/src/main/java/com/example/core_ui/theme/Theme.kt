@@ -1,4 +1,4 @@
-package com.example.boilerplatecompose.ui.theme
+package com.example.core_ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
