@@ -10,9 +10,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.boilerplatecompose.ui.theme.BoilerPlateComposeTheme
+import com.example.core_ui.theme.BoilerPlateComposeTheme
 import com.example.core_ui.Dimensions
-import java.time.format.TextStyle
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,13 +37,6 @@ fun Greeting(name: String) {
         style = androidx.compose.ui.text.TextStyle(
             fontSize = Dimensions.text.headline
         )
-    )
-
-    listOf(
-        "a",
-        "a",
-        "a",
-        "a",
     )
 }
 
