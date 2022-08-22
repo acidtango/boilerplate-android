@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id(Linter.ktlint) version Linter.ktlintVersion
+    id("dagger.hilt.android.plugin")
+    id("kotlin-kapt")
 }
 
 android {
@@ -74,6 +76,10 @@ dependencies {
     implementation(Compose.viewModelCompose)
     implementation(Compose.activityCompose)
     androidTestImplementation(Compose.composeJUnit)
+
+    // Hilt
+    implementation(DaggerHilt.hiltAndroid)
+    kapt(DaggerHilt.hiltCompiler)
 
     // TESTING
     testImplementation(Testing.robolectric)
