@@ -52,6 +52,8 @@ dependencies {
     implementation Compose.viewModelCompose
     implementation Compose.activityCompose
 
+    kapt DaggerHilt.hiltCompiler
+    implementation DaggerHilt.hiltAndroid
 
     testImplementation Testing.junit4
     testImplementation Testing.junitAndroidExt

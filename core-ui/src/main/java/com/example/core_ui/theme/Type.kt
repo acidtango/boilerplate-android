@@ -1,4 +1,4 @@
-package com.example.boilerplatecompose.ui.theme
+package com.example.core_ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
