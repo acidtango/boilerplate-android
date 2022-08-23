@@ -66,6 +66,7 @@ android {
 dependencies {
     implementation(project(Modules.coreUi))
     implementation(project(Modules.pokemonData))
+    implementation(project(Modules.pokemonDomain))
 
     implementation(Compose.compiler)
     implementation(Compose.ui)

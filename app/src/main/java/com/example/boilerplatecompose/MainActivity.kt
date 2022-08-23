@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.core_ui.Dimensions
 import com.example.core_ui.theme.BoilerPlateComposeTheme
-import com.example.pokemon_data.repository.PokemonRepository
+import com.example.pokemon_domain.useCases.GetPokemonsUseCase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -22,13 +22,13 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
 
     @Inject
-    lateinit var pokemonRepository: PokemonRepository
+    lateinit var pokemonRepository: GetPokemonsUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // TODO Remove this.
         GlobalScope.launch {
-            pokemonRepository.pokemons(0, 1)
+            pokemonRepository.invoke()
         }
 
         setContent {
