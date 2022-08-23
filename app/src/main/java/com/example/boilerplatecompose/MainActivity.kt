@@ -3,6 +3,7 @@ package com.example.boilerplatecompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -12,24 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.core_ui.Dimensions
 import com.example.core_ui.theme.BoilerPlateComposeTheme
-import com.example.pokemon_domain.useCases.GetPokemonsUseCase
+import com.example.pokemon_presentation.views.PokemonsScreen
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    @Inject
-    lateinit var pokemonRepository: GetPokemonsUseCase
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // TODO Remove this.
-        GlobalScope.launch {
-            pokemonRepository.invoke()
-        }
 
         setContent {
             BoilerPlateComposeTheme {
@@ -38,7 +29,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    Column() {
+                        Greeting("Android")
+                        PokemonsScreen()
+                    }
                 }
             }
         }

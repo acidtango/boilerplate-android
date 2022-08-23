@@ -67,6 +67,7 @@ dependencies {
     implementation(project(Modules.coreUi))
     implementation(project(Modules.pokemonData))
     implementation(project(Modules.pokemonDomain))
+    implementation(project(Modules.pokemonPresentation))
 
     implementation(Compose.compiler)
     implementation(Compose.ui)

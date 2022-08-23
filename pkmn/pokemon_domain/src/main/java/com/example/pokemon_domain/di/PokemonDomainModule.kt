@@ -5,16 +5,15 @@ import com.example.pokemon_domain.useCases.GetPokemonsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
-@InstallIn(SingletonComponent::class) // TODO change this to viewmodel
+@InstallIn(ViewModelComponent::class)
 object PokemonDomainModule {
 
-    // TODO change this to viewmodel also
+    @ViewModelScoped
     @Provides
-    @Singleton
     fun providesPokemonUseCase(
         repository: PokemonRepository
     ): GetPokemonsUseCase {

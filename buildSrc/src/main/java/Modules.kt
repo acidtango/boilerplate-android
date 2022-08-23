@@ -3,4 +3,5 @@ object Modules {
     const val coreUi = ":core-ui"
     const val pokemonData = ":pkmn:pokemon_data"
     const val pokemonDomain = ":pkmn:pokemon_domain"
+    const val pokemonPresentation = ":pkmn:pokemon_presentation"
 }
