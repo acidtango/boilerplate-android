@@ -11,6 +11,9 @@ on:
 jobs:
   build:
     runs-on: macos-latest
+    strategy:
+      matrix:
+        api-level: [26, 31]
     steps:
     - uses: actions/checkout@v3
     - name: set up JDK 11
@@ -21,7 +24,7 @@ jobs:
     - name: run instrumented tests
       uses: reactivecircus/android-emulator-runner@v2.25.0
       with:
-        api-level: 31
+        api-level: ${{ matrix.api-level }}
         arch: x86_64
         script: ./gradlew connectedCheck
     - name: run lint and unitTest
