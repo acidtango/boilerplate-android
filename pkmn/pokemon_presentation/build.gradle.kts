@@ -5,4 +5,5 @@ apply {
 dependencies {
     "implementation"(project(Modules.coreUi))
     "implementation"(project(Modules.pokemonDomain))
+    "implementation"(Coil.coilCompose)
 }

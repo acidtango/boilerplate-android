@@ -30,7 +30,6 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Column() {
-                        Greeting("Android")
                         PokemonsScreen()
                     }
                 }

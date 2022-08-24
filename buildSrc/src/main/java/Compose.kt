@@ -24,4 +24,9 @@ object Compose {
     const val composeManifest = "androidx.compose.ui:ui-test-manifest:$composeVersion"
     const val composeJUnit = "androidx.compose.ui:ui-test-junit4:$composeVersion"
 
+    private const val  customViewVersion = "1.2.0-alpha01"
+    const val customView = "androidx.customview:customview:$customViewVersion"
+    private const val  poolingContainerVersion = "1.0.0-alpha01"
+    const val poolingContainer = "androidx.customview:customview-poolingcontainer:$poolingContainerVersion"
+
 }
