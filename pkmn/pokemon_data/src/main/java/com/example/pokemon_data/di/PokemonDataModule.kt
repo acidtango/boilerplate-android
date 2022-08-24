@@ -1,7 +1,7 @@
 package com.example.pokemon_data.di
 
 import com.example.pokemon_data.remote.PokemonApi
-import com.example.pokemon_data.repository.PokemonRepositoryImpl
+import com.example.pokemon_data.repository.PokemonRepositoryApi
 import com.example.pokemon_domain.repository.PokemonRepository
 import dagger.Module
 import dagger.Provides
@@ -39,7 +39,7 @@ object PokemonDataModule {
     @Singleton
     @Provides
     fun providePokemonRepository(api: PokemonApi): PokemonRepository {
-        return PokemonRepositoryImpl(
+        return PokemonRepositoryApi(
             api = api
         )
     }

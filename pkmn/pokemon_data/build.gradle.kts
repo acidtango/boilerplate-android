@@ -3,6 +3,7 @@ apply {
 }
 
 dependencies {
+    "implementation"(project(Modules.core))
     "implementation"(project(Modules.pokemonDomain))
     "implementation"(Retrofit.okHttp)
     "implementation"(Retrofit.retrofit)
