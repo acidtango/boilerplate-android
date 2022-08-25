@@ -1,8 +1,8 @@
 package com.example.pokemon_data.repository
 
 import com.example.core.Resource
-import com.example.pokemon_data.dataSource.remote.networkMappers.toDomain
 import com.example.pokemon_data.dataSource.remote.PokemonApi
+import com.example.pokemon_data.dataSource.remote.networkMappers.toDomain
 import com.example.pokemon_domain.models.Pokemons
 import com.example.pokemon_domain.repository.PokemonRepository
 import javax.inject.Inject

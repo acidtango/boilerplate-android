@@ -8,10 +8,10 @@ object Compose {
     const val compiler = "androidx.compose.compiler:compiler:$composeCompilerVersion"
 
 
-    private const val navigationVersion = "2.4.0-beta02"
+    private const val navigationVersion = "2.5.1"
     const val navigation = "androidx.navigation:navigation-compose:$navigationVersion"
 
-    private const val hiltNavigationComposeVersion = "1.0.0-beta01"
+    private const val hiltNavigationComposeVersion = "1.0.0"
     const val hiltNavigationCompose = "androidx.hilt:hilt-navigation-compose:$hiltNavigationComposeVersion"
 
     private const val activityComposeVersion = "1.4.0"

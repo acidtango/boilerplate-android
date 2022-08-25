@@ -10,6 +10,7 @@ import com.example.pokemon_presentation.viewModels.PokemonsViewModel
 
 @Composable
 fun PokemonsScreen(
+    onCardClick: (position: Int) -> Unit,
     viewModel: PokemonsViewModel = hiltViewModel()
 ) {
     LazyColumn() {
@@ -23,7 +24,7 @@ fun PokemonsScreen(
             if ((index + 1) >= viewModel.page.value) {
                 viewModel.nextPage()
             }
-            PokemonCard(pokemon = pokemon, position = index + 1)
+            PokemonCard(pokemon = pokemon, position = index + 1, onClick = onCardClick)
         }
     }
 }

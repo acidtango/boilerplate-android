@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,15 +24,18 @@ import com.example.core_ui.Dimensions
 import com.example.core_ui.theme.BoilerPlateComposeTheme
 import com.example.pokemon_domain.models.Pokemon
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PokemonCard(
     pokemon: Pokemon,
     position: Int,
+    onClick: (position: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
-        shape = RectangleShape
+        shape = RectangleShape,
+        onClick = { onClick(position) }
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -56,6 +60,10 @@ fun PokemonCard(
 @Composable
 fun CardPreview() {
     BoilerPlateComposeTheme {
-        PokemonCard(pokemon = Pokemon(name = "Charizard", url = ""), position = 6,)
+        PokemonCard(
+            pokemon = Pokemon(name = "Charizard", url = ""),
+            position = 6,
+            onClick = { }
+        )
     }
 }
