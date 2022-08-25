@@ -5,18 +5,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.boilerplatecompose.navigation.Route
-import com.example.core_ui.Dimensions
 import com.example.core_ui.theme.BoilerPlateComposeTheme
 import com.example.pokemon_presentation.views.PokemonDetail
 import com.example.pokemon_presentation.views.PokemonsScreen
@@ -60,23 +56,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(
-        text = "Hello $name!",
-        style = androidx.compose.ui.text.TextStyle(
-            fontSize = Dimensions.text.headline
-        )
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    BoilerPlateComposeTheme {
-        Greeting("Android")
     }
 }

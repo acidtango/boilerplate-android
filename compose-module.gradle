@@ -37,6 +37,13 @@ android {
     kotlinOptions {
         jvmTarget = '11'
     }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
 }
 
 dependencies {
@@ -74,4 +81,6 @@ dependencies {
     androidTestImplementation Testing.composeUiTest
     androidTestImplementation Testing.mockk
     androidTestImplementation Testing.mockWebServer
+
+    testImplementation(Testing.robolectric)
 }

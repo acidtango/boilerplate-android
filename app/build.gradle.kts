@@ -55,6 +55,9 @@ android {
         exclude("META-INF/licenses/ASM")
     }
     testOptions {
+        unitTests.apply {
+            isIncludeAndroidResources = true
+        }
         packagingOptions {
             jniLibs {
                 useLegacyPackaging = true
