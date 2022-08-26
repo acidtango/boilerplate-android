@@ -55,6 +55,9 @@ android {
         exclude("META-INF/licenses/ASM")
     }
     testOptions {
+        unitTests.apply {
+            isIncludeAndroidResources = true
+        }
         packagingOptions {
             jniLibs {
                 useLegacyPackaging = true
@@ -64,7 +67,11 @@ android {
 }
 
 dependencies {
+    implementation(project(Modules.core))
     implementation(project(Modules.coreUi))
+    implementation(project(Modules.pokemonData))
+    implementation(project(Modules.pokemonDomain))
+    implementation(project(Modules.pokemonPresentation))
 
     implementation(Compose.compiler)
     implementation(Compose.ui)

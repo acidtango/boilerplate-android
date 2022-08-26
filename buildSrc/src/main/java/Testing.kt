@@ -23,7 +23,7 @@ object Testing {
     private const val testRunnerVersion = "1.4.0"
     const val testRunner = "androidx.test:runner:$testRunnerVersion"
 
-    private const val robolectricVersion = "4.8.1"
+    private const val robolectricVersion = "4.8.2"
     const val robolectric = "org.robolectric:robolectric:$robolectricVersion"
 
     const val espressoCore = "androidx.test.espresso:espresso-core:3.4.0"

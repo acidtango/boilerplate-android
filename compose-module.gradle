@@ -37,6 +37,13 @@ android {
     kotlinOptions {
         jvmTarget = '11'
     }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
 }
 
 dependencies {
@@ -51,6 +58,10 @@ dependencies {
     implementation Compose.navigation
     implementation Compose.viewModelCompose
     implementation Compose.activityCompose
+    debugImplementation Compose.composeTooling
+    debugImplementation Compose.composeManifest
+    debugImplementation Compose.customView
+    debugImplementation Compose.poolingContainer
 
     kapt DaggerHilt.hiltCompiler
     implementation DaggerHilt.hiltAndroid
@@ -70,4 +81,6 @@ dependencies {
     androidTestImplementation Testing.composeUiTest
     androidTestImplementation Testing.mockk
     androidTestImplementation Testing.mockWebServer
+
+    testImplementation(Testing.robolectric)
 }
