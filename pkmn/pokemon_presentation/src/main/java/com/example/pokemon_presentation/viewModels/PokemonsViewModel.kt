@@ -27,10 +27,12 @@ class PokemonsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            when (val it = pokemonsUseCase()) {
-                is Resource.Error -> TODO()
-                is Resource.Success -> {
-                    state = it.data!!
+            pokemonsUseCase().collect {
+                when (it) {
+                    is Resource.Error -> TODO()
+                    is Resource.Success -> {
+                        state = it.data!!
+                    }
                 }
             }
         }
@@ -42,15 +44,21 @@ class PokemonsViewModel @Inject constructor(
 
             if (page.value > 1 && state.count >= state.pokemonsInfo.size) {
                 viewModelScope.launch {
-                    when (val it = pokemonsUseCase.invoke(offset = state.pokemonsInfo.size, limit = limit)) {
-                        is Resource.Error -> TODO()
-                        is Resource.Success -> {
-                            val originalList = state.pokemonsInfo
-                            val newList = it.data!!.pokemonsInfo
-                            val combinedList = originalList.union(newList).toList()
-                            state = state.copy(count = it.data!!.count, pokemonsInfo = combinedList)
+                    pokemonsUseCase.nextPage(offset = state.pokemonsInfo.size, limit = limit)
+                        .collect {
+                            when (it) {
+                                is Resource.Error -> TODO()
+                                is Resource.Success -> {
+                                    val originalList = state.pokemonsInfo
+                                    val newList = it.data!!.pokemonsInfo
+                                    val combinedList = originalList.union(newList).toList()
+                                    state = state.copy(
+                                        count = it.data!!.count,
+                                        pokemonsInfo = combinedList
+                                    )
+                                }
+                            }
                         }
-                    }
                 }
             }
         }

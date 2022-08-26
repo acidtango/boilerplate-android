@@ -12,5 +12,5 @@ dependencies {
 
     "kapt"(Room.roomCompiler)
     "implementation"(Room.roomKtx)
-    "implementation"(Room.roomRuntime)
+    "api"(Room.roomRuntime)
 }
