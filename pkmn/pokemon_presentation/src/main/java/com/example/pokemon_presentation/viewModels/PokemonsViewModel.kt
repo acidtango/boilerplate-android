@@ -23,7 +23,7 @@ class PokemonsViewModel @Inject constructor(
     var pokemonScrollPosition = 0
     val page = mutableStateOf(1)
 
-    val limit = 25
+    val limit = 10
 
     init {
         viewModelScope.launch {

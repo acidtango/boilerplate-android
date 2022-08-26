@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.core.Resource
 import com.example.pokemon_data.dataSource.remote.PokemonApi
+import com.example.pokemon_data.dataSource.remote.PokemonNetworkDataSource
 import com.example.pokemon_domain.models.Pokemon
 import com.example.pokemon_domain.models.Pokemons
 import com.example.pokemon_domain.repository.PokemonRepository
@@ -25,7 +26,7 @@ import java.util.concurrent.TimeUnit
 
 @RunWith(RobolectricTestRunner::class)
 @Config(instrumentedPackages = ["androidx.loader.content"], sdk = [32])
-class PokemonRepositoryApiTest {
+class PokemonNetworkDataSourceTest {
 
     private lateinit var repository: PokemonRepository
     private lateinit var mockWebServer: MockWebServer
@@ -54,7 +55,7 @@ class PokemonRepositoryApiTest {
             .build()
             .create(PokemonApi::class.java)
 
-        repository = PokemonRepositoryApi(
+        repository = PokemonNetworkDataSource(
             api = api
         )
     }

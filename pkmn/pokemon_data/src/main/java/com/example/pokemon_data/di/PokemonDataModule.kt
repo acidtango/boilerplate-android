@@ -1,7 +1,13 @@
 package com.example.pokemon_data.di
 
+import android.app.Application
+import androidx.room.Room
+import com.example.pokemon_data.dataSource.local.PokemonDao
+import com.example.pokemon_data.dataSource.local.PokemonDatabase
+import com.example.pokemon_data.dataSource.local.PokemonLocalDataSource
 import com.example.pokemon_data.dataSource.remote.PokemonApi
-import com.example.pokemon_data.repository.PokemonRepositoryApi
+import com.example.pokemon_data.dataSource.remote.PokemonNetworkDataSource
+import com.example.pokemon_data.repository.PokemonRepositoryImpl
 import com.example.pokemon_domain.repository.PokemonRepository
 import dagger.Module
 import dagger.Provides
@@ -36,11 +42,46 @@ object PokemonDataModule {
             .create(PokemonApi::class.java)
     }
 
+    @Provides
+    @Singleton
+    fun providePokemonDatabase(app: Application): PokemonDatabase {
+        return Room.databaseBuilder(
+            app,
+            PokemonDatabase::class.java,
+            "pokemon_db"
+        ).build()
+    }
+
     @Singleton
     @Provides
-    fun providePokemonRepository(api: PokemonApi): PokemonRepository {
-        return PokemonRepositoryApi(
+    fun providePokemonDao(database: PokemonDatabase): PokemonDao {
+        return database.pokemonDao()
+    }
+
+    @Singleton
+    @Provides
+    fun providePokemonNetworkDataSource(api: PokemonApi): PokemonNetworkDataSource {
+        return PokemonNetworkDataSource(
             api = api
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideLocalPokemonDataSource(pokemonDao: PokemonDao): PokemonLocalDataSource {
+        return PokemonLocalDataSource(
+            pokemonDao = pokemonDao
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun providePokemonRepository(
+        network: PokemonNetworkDataSource,
+        local: PokemonLocalDataSource
+    ): PokemonRepository {
+        return PokemonRepositoryImpl(
+            network = network, local = local
         )
     }
 }
