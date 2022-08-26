@@ -1,5 +1,7 @@
 package com.example.pokemon_data.dataSource.remote.networkMappers
 
+import com.example.pokemon_data.dataSource.local.PokemonEntity
+import com.example.pokemon_data.dataSource.local.toEntity
 import com.example.pokemon_data.models.PokemonNetwork
 import com.example.pokemon_data.models.PokemonsNetwork
 import com.example.pokemon_domain.models.Pokemon
@@ -21,5 +23,14 @@ class PokemonMapperTest {
         )
 
         assertThat(pokemonsNetwork.toDomain()).isEqualTo(expected)
+    }
+
+    @Test
+    fun `Pokemons to entity`() {
+        val pokemons = Pokemon("Pikachu", "")
+
+        val expected = PokemonEntity(id = null, "Pikachu", "")
+
+        assertThat(pokemons.toEntity()).isEqualTo(expected)
     }
 }

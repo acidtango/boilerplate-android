@@ -1,13 +1,11 @@
-package com.example.pokemon_data.repository
+package com.example.pokemon_data.dataSource.remote
 
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.core.Resource
-import com.example.pokemon_data.dataSource.remote.PokemonApi
-import com.example.pokemon_data.dataSource.remote.PokemonNetworkDataSource
-import com.example.pokemon_domain.models.Pokemon
-import com.example.pokemon_domain.models.Pokemons
-import com.example.pokemon_domain.repository.PokemonRepository
+import com.example.pokemon_data.fixtures.pokemonsJson
+import com.example.pokemon_data.models.PokemonNetwork
+import com.example.pokemon_data.models.PokemonsNetwork
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
@@ -28,7 +26,7 @@ import java.util.concurrent.TimeUnit
 @Config(instrumentedPackages = ["androidx.loader.content"], sdk = [32])
 class PokemonNetworkDataSourceTest {
 
-    private lateinit var repository: PokemonRepository
+    private lateinit var networkDataSource: PokemonNetworkDataSource
     private lateinit var mockWebServer: MockWebServer
     private lateinit var okHttpClient: OkHttpClient
     private lateinit var api: PokemonApi
@@ -55,7 +53,7 @@ class PokemonNetworkDataSourceTest {
             .build()
             .create(PokemonApi::class.java)
 
-        repository = PokemonNetworkDataSource(
+        networkDataSource = PokemonNetworkDataSource(
             api = api
         )
     }
@@ -64,20 +62,6 @@ class PokemonNetworkDataSourceTest {
     fun tearDown() {
         mockWebServer.shutdown()
     }
-
-    val pokemonsJson = """
-        {
-           "count":1154,
-           "next":"https://pokeapi.co/api/v2/pokemon?offset=1&limit=1",
-           "previous":null,
-           "results":[
-              {
-                 "name":"bulbasaur",
-                 "url":"https://pokeapi.co/api/v2/pokemon/1/"
-              }
-           ]
-        }
-    """.trimIndent()
 
     @Test
     fun `Get Pokemons`() {
@@ -88,15 +72,15 @@ class PokemonNetworkDataSourceTest {
                     .setBody(pokemonsJson)
             )
 
-            val response = repository.pokemons(0, 1)
+            val response = networkDataSource.getPokemons(0, 1)
 
             println(response.exception?.stackTraceToString())
             if (response is Resource.Success) {
                 assertThat(response.data!!).isEqualTo(
-                    Pokemons(
+                    PokemonsNetwork(
                         count = 1154,
                         pokemonsInfo = listOf(
-                            Pokemon(
+                            PokemonNetwork(
                                 name = "bulbasaur",
                                 url = "https://pokeapi.co/api/v2/pokemon/1/"
                             )
@@ -115,7 +99,7 @@ class PokemonNetworkDataSourceTest {
                     .setResponseCode(404)
             )
 
-            val response = repository.pokemons(0, 1)
+            val response = networkDataSource.getPokemons(0, 1)
 
             println(response.exception?.message)
             if (response is Resource.Error) {
