@@ -31,8 +31,10 @@ class PokemonsViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             pokemonsUseCase()
-                .onStart { Log.d("TODOSomething", "Loading state for example") }
-                .catch { exception -> Log.d("CatchedException", exception.stackTraceToString()) }
+                .onStart {
+                    // Load state for example
+                }
+                .catch { exception -> println(exception.stackTraceToString()) }
                 .collect {
                     when (it) {
                         is Resource.Error -> {
@@ -55,7 +57,10 @@ class PokemonsViewModel @Inject constructor(
                     pokemonsUseCase.nextPage(offset = state.pokemonsInfo.size, limit = limit)
                         .collect {
                             when (it) {
-                                is Resource.Error -> Log.d("ErrorRepository", it.exception!!.stackTraceToString())
+                                is Resource.Error -> Log.d(
+                                    "ErrorRepository",
+                                    it.exception!!.stackTraceToString()
+                                )
                                 is Resource.Success -> {
                                     val originalList = state.pokemonsInfo
                                     val newList = it.data!!.pokemonsInfo
