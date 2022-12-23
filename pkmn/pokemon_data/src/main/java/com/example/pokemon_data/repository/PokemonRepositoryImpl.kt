@@ -26,7 +26,7 @@ constructor(
 
             var count = local.getCount()
             if (count == 0) count = 1000
-            emit(Resource.Success(Pokemons(count = count, pokemonsInfo = cachedPokemons)))
+
 
             val response = network.getPokemons(offset, limit)
             if (response is Resource.Success) {
@@ -39,7 +39,11 @@ constructor(
                 if (count == 0) count = 1000
 
                 emit(Resource.Success(Pokemons(count = count, pokemonsInfo = pokemons)))
-            } else emit(Resource.Error(response.exception!!))
+            } else {
+                emit(Resource.Success(Pokemons(count = count, pokemonsInfo = cachedPokemons)))
+                emit(Resource.Error(response.exception!!))
+            }
+
         }
     }
 
