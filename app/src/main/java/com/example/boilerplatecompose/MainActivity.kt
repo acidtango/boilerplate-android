@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     scaffoldState = rememberScaffoldState()
-                ) { _ ->
+                ) {
                     NavHost(
                         navController = navController,
                         startDestination = Route.POKEMON_LIST
