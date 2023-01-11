@@ -18,11 +18,11 @@ jobs:
       with:
         distribution: 'zulu'
         java-version: 11
+    - name: run lint and unitTest
+        run: ./gradlew lintDebug testDebugUnitTest
     - name: run instrumented tests
       uses: reactivecircus/android-emulator-runner@v2.25.0
       with:
         api-level: 31
         arch: x86_64
         script: ./gradlew connectedCheck
-    - name: run lint and unitTest
-      run: ./gradlew lintDebug testDebugUnitTest
