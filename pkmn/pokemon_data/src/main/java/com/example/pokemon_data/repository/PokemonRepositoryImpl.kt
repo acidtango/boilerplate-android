@@ -5,6 +5,7 @@ import com.example.pokemon_data.dataSource.local.PokemonLocalDataSource
 import com.example.pokemon_data.dataSource.local.toDomain
 import com.example.pokemon_data.dataSource.remote.PokemonNetworkDataSource
 import com.example.pokemon_data.dataSource.remote.networkMappers.toEntity
+import com.example.pokemon_domain.models.Pokemon
 import com.example.pokemon_domain.models.Pokemons
 import com.example.pokemon_domain.repository.PokemonRepository
 import kotlinx.coroutines.flow.Flow
@@ -19,29 +20,41 @@ constructor(
 ) : PokemonRepository {
     override suspend fun pokemons(offset: Int, limit: Int): Flow<Resource<Pokemons>> {
         return flow {
-            try {
-                var count = 0
-                val response = network.getPokemons(offset, limit)
 
-                if (response is Resource.Success) {
-                    count = response.data!!.count
-                    response.data!!.pokemonsInfo.forEach { pokemon ->
-                        local.insert(pokemon.toEntity())
-                    }
+            // throw Exception("Forced exception")
+            val cachedPokemons = getLocalPokemons(offset, limit)
+
+            var count = local.getCount()
+            if (count == 0) count = 1000
+
+
+            val response = network.getPokemons(offset, limit)
+            if (response is Resource.Success) {
+                count = response.data!!.count
+                response.data!!.pokemonsInfo.forEach { pokemon ->
+                    local.insert(pokemon.toEntity())
                 }
-
-                val localPokemons = local.getPokemons(offset, limit)
-
-                val pokemons = localPokemons.map { pokemonEntity ->
-                    pokemonEntity.toDomain()
-                }
+                val pokemons = getLocalPokemons(offset, limit)
 
                 if (count == 0) count = 1000
 
                 emit(Resource.Success(Pokemons(count = count, pokemonsInfo = pokemons)))
-            } catch (e: Exception) {
-                emit(Resource.Error(e))
+            } else {
+                emit(Resource.Success(Pokemons(count = count, pokemonsInfo = cachedPokemons)))
+                emit(Resource.Error(response.exception!!))
             }
+
+        }
+    }
+
+    private suspend fun getLocalPokemons(
+        offset: Int,
+        limit: Int
+    ): List<Pokemon> {
+        val localPokemons = local.getPokemons(offset, limit)
+
+        return localPokemons.map { pokemonEntity ->
+            pokemonEntity.toDomain()
         }
     }
 }

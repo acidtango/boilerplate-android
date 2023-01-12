@@ -20,6 +20,9 @@ interface PokemonDao {
     @Query("select * from pokemonentity limit :limit offset :offset")
     suspend fun getPokemons(offset: Int, limit: Int): List<PokemonEntity>
 
+    @Query("select count(*) from pokemonentity")
+    suspend fun getCount(): Int
+
     suspend fun insertOrUpdate(
         pokemon: PokemonEntity
     ) {

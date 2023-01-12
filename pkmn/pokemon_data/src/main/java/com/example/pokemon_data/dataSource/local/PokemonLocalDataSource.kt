@@ -12,4 +12,8 @@ class PokemonLocalDataSource
     suspend fun getPokemons(offset: Int, limit: Int): List<PokemonEntity> {
         return pokemonDao.getPokemons(offset, limit)
     }
+
+    suspend fun getCount(): Int {
+        return pokemonDao.getCount()
+    }
 }
