@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.Modifier
@@ -29,31 +30,33 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    scaffoldState = rememberScaffoldState()
-                ) {
-                    NavHost(
-                        navController = navController,
-                        startDestination = Route.POKEMON_LIST
-                    ) {
-                        composable(Route.POKEMON_LIST) {
-                            PokemonsScreen(onCardClick = { position ->
-                                navController.navigate(Route.DETAIL + "/$position")
-                            })
-                        }
-
-                        composable(
-                            Route.DETAIL + "/{position}",
-                            arguments = listOf(
-                                navArgument("position") {
-                                    type = NavType.IntType
-                                }
-                            )
+                    scaffoldState = rememberScaffoldState(),
+                    content = { padding ->
+                        NavHost(
+                            navController = navController,
+                            startDestination = Route.POKEMON_LIST,
+                            modifier = Modifier.padding(padding)
                         ) {
-                            val position = it.arguments?.getInt("position")!!
-                            PokemonDetail(position = position)
+                            composable(Route.POKEMON_LIST) {
+                                PokemonsScreen(onCardClick = { position ->
+                                    navController.navigate(Route.DETAIL + "/$position")
+                                })
+                            }
+
+                            composable(
+                                Route.DETAIL + "/{position}",
+                                arguments = listOf(
+                                    navArgument("position") {
+                                        type = NavType.IntType
+                                    }
+                                )
+                            ) {
+                                val position = it.arguments?.getInt("position")!!
+                                PokemonDetail(position = position)
+                            }
                         }
                     }
-                }
+                )
             }
         }
     }
