@@ -1,5 +1,5 @@
 object Build {
-    private const val androidBuildToolsVersion = "7.2.2"
+    private const val androidBuildToolsVersion = "8.7.1"
     const val androidBuildTools = "com.android.tools.build:gradle:$androidBuildToolsVersion"
 
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${KotlinObject.version}"
