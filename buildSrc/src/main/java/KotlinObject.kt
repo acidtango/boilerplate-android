@@ -1,4 +1,4 @@
 object KotlinObject {
-    const val version = "1.7.10"
+    const val version = "2.4.10"
 }
 
