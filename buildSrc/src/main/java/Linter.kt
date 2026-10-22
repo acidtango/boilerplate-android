@@ -1,4 +1,4 @@
 object Linter {
-    const val ktlintVersion =  "10.3.0"
+    const val ktlintVersion =  "14.2.0"
     const val ktlint = "org.jlleitschuh.gradle.ktlint"
 }
